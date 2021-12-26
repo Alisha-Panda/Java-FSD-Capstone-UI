@@ -15,7 +15,7 @@
 <div class="container-fluid mt-5 ml-4">
     <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
         <input class="form-control" name="search" formControlName="search" 
-         type="text" placeholder="Product Search" aria-label="search">
+         type="text" placeholder="Food Item Search" aria-label="search">
         <button class="btn btn-outline-success" type="submit">Search</button>
         <a class="btn btn-success ml-4" [style.display] = "isAddDisplay" data-toggle="modal" data-target="#addProductId" role="button">Add</a>
         
@@ -24,10 +24,10 @@
             <thead>
                 <tr>
                     <th>
-                        Product Image
+                        Food Item Image
                     </th>
                     <th>
-                        Product Name
+                        Food Item Name
                     </th>
                     <th>
                         Category
@@ -50,16 +50,16 @@
                     <td>{{ p.price }}</td>
                     <td>
                     <div class="row"> 
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <a (click) = "addCartClick(p.id)" class="btn btn-success">Add to Cart</a>
                         </div>
 
                         <div class="col-sm-3">
-                            <a data-toggle="modal" data-target="#updateProductId"  (click)= "updateClick(p.id)" class="btn btn-warning">Update</a>
+                            <a data-toggle="modal" [style.display] = "isUpdateDisplay" data-target="#updateProductId"  (click)= "updateClick(p.id)" class="btn btn-warning">Update</a>
                         </div>
 
-                        <div class="col-sm-2">
-                            <a (click) = "deleteClick(p.id)" class="btn btn-danger">Delete</a>
+                        <div class="col-sm-3">
+                            <a (click) = "deleteClick(p.id)" [style.display] = "isDeleteDisplay" class="btn btn-danger">Delete</a>
                         </div>
                     </div> 
                 </td>

@@ -7,17 +7,26 @@ import { OrderapiService } from 'src/app/service/orderapi.service';
   styleUrls: ['./listorders.component.css']
 })
 export class ListordersComponent implements OnInit {
-  public orders : any;
+  public orders : any[] = [];
   constructor(private orderapiService : OrderapiService) { }
 
   ngOnInit(): void {
-    this.orderapiService.getOrders().subscribe((res) => {
-      console.log(res);
-      this.orders = res;
-    },
-    (error) => {
-      console.log(error);
-    });
+    let username = sessionStorage.getItem("username");
+    console.log(username);
+    if(username != null){
+      this.orderapiService.getOrders().subscribe((res) => {
+        let orderArray = Object.values(res);
+        for(let o in orderArray){
+          if(orderArray[o]["user"]["username"] == username){
+            this.orders.push(orderArray[o]);
+            console.log(this.orders);
+            break;
+          }
+        }
+      },
+      (error) => {
+        console.log(error);
+      });
+    }
   }
-
 }

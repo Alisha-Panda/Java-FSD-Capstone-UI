@@ -23,6 +23,8 @@ export class ProductsComponent implements OnInit {
   public displayAlert : string;
   public displayAlertPresent : string;
   public isAddDisplay : string;
+  public isUpdateDisplay : string;
+  public isDeleteDisplay : string;
   constructor(private router : Router, private productapiService : ProductapiService, private userapiService :UserapiService, private cartapiService : CartapiService, private formBuilder: FormBuilder) { 
     this.searchForm = this.formBuilder.group({
       search : [""]
@@ -31,19 +33,27 @@ export class ProductsComponent implements OnInit {
     this.displayAlert = "none";
     this.displayAlertPresent = "none";
     this.isAddDisplay = "none";
+    this.isUpdateDisplay = "none";
+    this.isDeleteDisplay = "none";
   }
  
   ngOnInit(): void {
     if(sessionStorage.getItem("username") != null && sessionStorage.getItem("role") != null){
       if(sessionStorage.getItem("role") == "admin"){
         this.isAddDisplay = "block";
+        this.isUpdateDisplay = "block";
+        this.isDeleteDisplay = "block";
       }
       else{
         this.isAddDisplay = "none";
+        this.isUpdateDisplay = "none";
+        this.isDeleteDisplay = "none";
       }
     }
     else{
       this.isAddDisplay = "none";
+      this.isUpdateDisplay = "none";
+      this.isDeleteDisplay = "none";
     }
       let cat = this.router.url.split("=")[1];
       this.category = cat;
